@@ -1,0 +1,70 @@
+{
+    "Empresas": [{
+            "nombreEmpresa": "Protección - Administrativa",
+            "logoEmpresa": "assets/Proteccion.png",
+            "ruta": "Perfiles"
+        },
+        {
+            "nombreEmpresa": "Fundacion de la Mujer",
+            "logoEmpresa": "assets/fundacionDeLaMujer.png",
+            "ruta": "Perfiles"
+
+        },
+        {
+            "nombreEmpresa": "EpmMóvil",
+            "logoEmpresa": "assets/epm_logo.png",
+            "ruta": "Perfiles"
+
+        },
+        {
+            "nombreEmpresa": "SolatiMóvil",
+            "logoEmpresa": "assets/solati.png",
+            "ruta": "Perfiles"
+
+        }
+
+    ],
+    "Perfiles": [
+
+        {
+            "perfil": "assets/Perfil_ico.png",
+            "subtitle": "106",
+            "nombre": "Gestor Adminfo Móvil"
+        },
+        {
+            "perfil": "assets/Perfil_ico.png",
+            "subtitle": "116",
+            "nombre": "Gerstión Hogares"
+        }
+    ],
+    "Clientes": [
+
+        {
+            "logoCliente": "assets/fundacionDeLaMujer.png",
+            "nit": "1091069",
+            "cliente": "Cliente 1091069",
+            "nroSuscripcion": "1091069",
+            "valorPendiente": "665976"
+        },
+        {
+            "logoCliente": "assets/Proteccion.png",
+            "nit": "1091069",
+            "cliente": " Cliente 1091069",
+            "nroSuscripcion": "1091069",
+            "valorPendiente": "665976"
+        },
+        {
+            "logoCliente": "assets/solati.png",
+            "nit": "1091069",
+            "cliente": " Cliente 1091069",
+            "nroSuscripcion": "1091069",
+            "valorPendiente": "665976"
+        }
+    ],
+    "Usuarios":[
+        {
+            "username" : "eu",
+            "password" : "123"
+        }
+    ]
+}
