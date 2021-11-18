@@ -1,8 +1,6 @@
-import 'package:adminfo_new/User/repository/lista_empresa_repository.dart';
 import 'package:adminfo_new/adminfo_icons.dart';
 
 import 'package:adminfo_new/seguridad/Login/providers/login_form_provider.dart';
-import 'package:adminfo_new/seguridad/Login/services/login_service.dart';
 
 import 'package:adminfo_new/seguridad/Login/ui/widgets/button_tango_widget.dart';
 import 'package:adminfo_new/seguridad/Login/ui/widgets/card_login_widget.dart';
@@ -107,8 +105,7 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
-    Future<List> tipoListado;
-    tipoListado = listaEmpresas.cargarUsuarios();
+
     return SingleChildScrollView(
       child: Form(
         key: loginForm.formkey,
@@ -187,90 +184,102 @@ class _LoginForm extends StatelessWidget {
                         offset: Offset(0.10, 0.10))
                   ]),
               child: ButtonTango(
-                
-                buttonText: loginForm.isLoading 
-                ?'Espere'
-                :'Acceder',
-                onPressed:loginForm.isLoading ? null : () async {
-                 
-                 FocusScope.of(context).unfocus();
-                 final authService = Provider.of<AuthService>(context,listen: false);
-                 buildShowDialog(context);
-                 
-                  if(!loginForm.isValidForm())return ;
-                    loginForm.isLoading = true;
-                   
-                  final String? errorMessage = await authService.login(loginForm.usuario, loginForm.password);
-                if(errorMessage == null){
-                   Navigator.pushReplacementNamed(context,'Empresas');       
-                }else{
-                  print(errorMessage);
-                  loginForm.isLoading = false;
-                }      
-                                  },
-                                  height: 60.0,
-                                  width: 270.0,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    '¿Olvidó su contraseña?',
-                                    style: TextStyle(fontFamily: 'Gotham Book'),
-                                  ),
-                                  InkWell(
-                                    child: const Text(
-                                      '  haga clic aquí',
-                                      style: TextStyle(color: Colors.blue),
-                                    ),
-                                    onTap: () => {},
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                  
-                  
-                    
-                  
-                      );
-                      
-                  
-                      
-                      
-                    }
-                  
-    buildShowDialog(BuildContext context) {
-   
+                buttonText: loginForm.isLoading ? 'Espere' : 'Acceder',
+                onPressed: loginForm.isLoading
+                    ? null
+                    : () async {
+                        FocusScope.of(context).unfocus();
+                        Navigator.pushReplacementNamed(context, 'Empresas');
+                        // final authService =
+                        //     Provider.of<AuthService>(context, listen: false);
+
+                        // if (!loginForm.isValidForm()) return;
+
+                        // final String? errorMessage = await authService.login(
+                        //     loginForm.usuario, loginForm.password);
+                        // if (errorMessage == null) {
+                        //   Navigator.pushReplacementNamed(context, 'Empresas');
+                        // } else {
+                        //   loginForm.isLoading = false;
+                        //   buildShowDialog(context, loginForm.isLoading);
+                        // }
+                      },
+                height: 60.0,
+                width: 270.0,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                const Text(
+                  '¿Olvidó su contraseña?',
+                  style: TextStyle(fontFamily: 'Gotham Book'),
+                ),
+                InkWell(
+                  child: const Text(
+                    '  haga clic aquí',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () => {},
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  buildShowDialog(BuildContext context, bool isloading) {
     return showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Center( child :Text('Iniciando sesion')),
-            actions: [
-              Center(
-            child: Column(
-              children: [
-                SizedBox(height: 20,),
-                CircularProgressIndicator(),
-                SizedBox(height: 20,),
+          if (isloading == true) {
+            return AlertDialog(
+              title: const Center(child: Text('Iniciando sesion')),
+              actions: [
+                Center(
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CircularProgressIndicator(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                )
               ],
-            ),
-          )
-            ],
-          );
-          
+            );
+          } else {
+            return AlertDialog(
+              title: const Text(
+                'Usuario o Contraseña Incorrecta',
+                textAlign: TextAlign.center,
+              ),
+              actions: [
+                Center(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'))
+                    ],
+                  ),
+                )
+              ],
+            );
+          }
         });
   }
-  }
-
-  
-
-
-
-
+}

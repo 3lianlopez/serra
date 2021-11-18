@@ -1,11 +1,9 @@
 import 'package:adminfo_new/User/repository/lista_empresa_repository.dart';
 import 'package:adminfo_new/User/ui/Screens/perfiles_screen.dart';
 
-
 import 'package:adminfo_new/widgets/card_container.dart';
 import 'package:adminfo_new/widgets/icono_empresa.dart';
 import 'package:adminfo_new/widgets/image_adminfo_movil_15_widget.dart';
-
 
 import 'package:flutter/material.dart';
 
@@ -27,13 +25,17 @@ class EmpresaScreen extends StatelessWidget {
       backgroundColor: const Color(0xfff7f8fb),
       body: Stack(
         children: [
+          const CardContainer(
+              bottom: 0, top: 20, left: 20, right: 20, child: _ListaEmpresa()),
           Container(
-            padding: const EdgeInsets.only(top: 0, bottom: 0),
+            // padding: const EdgeInsets.only(top: 0, bottom: 10),
             //shape es la sombra
+            width: double.infinity,
+            height: 80,
+            margin: const EdgeInsets.only(top: 625),
+
             decoration: _createCardShape(),
           ),
-          const CardContainer(
-              bottom: 50, top: 20, left: 20, right: 20, child: _ListaEmpresa()),
         ],
       ),
     );
@@ -43,7 +45,7 @@ class EmpresaScreen extends StatelessWidget {
 BoxDecoration _createCardShape() => const BoxDecoration(
       image: DecorationImage(
           image: AssetImage('assets/Fondo_card.png'),
-          fit: BoxFit.contain,
+          fit: BoxFit.fill,
           alignment: Alignment.bottomCenter),
     );
 
@@ -58,16 +60,19 @@ class _ListaEmpresa extends StatelessWidget {
       children: [
         const LogoEmpresa(),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         Expanded(
           child: FutureBuilder(
               future: tipoListado,
               initialData: const [],
               builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                return ListView(
-                  shrinkWrap: true,
-                  children: _listView(snapshot.data!, context),
+                return Container(
+                  margin: const EdgeInsets.only(top: 20, bottom: 60),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: _listView(snapshot.data!, context),
+                  ),
                 );
               }),
         ),
@@ -89,7 +94,7 @@ List<Widget> _listView(List<dynamic> data, context) {
           image: empresas['logoEmpresa'],
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         ListTile(
             onTap: () {
@@ -116,7 +121,7 @@ List<Widget> _listView(List<dynamic> data, context) {
     lista
       ..add(empresa)
       ..add(const SizedBox(
-        height: 40,
+        height: 10,
       ))
       ..add(const Divider(
         endIndent: 20.0,

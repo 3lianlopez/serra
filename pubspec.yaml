@@ -69,10 +69,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   assets:
-    - assets/images/Adminfo-Movil-10.png
-    - assets/images/Adminfo-Movil-11.png
-    - assets/images/Adminfo-Movil-15.png
+
     - assets/
+    - assets/images/
     - data/ListaEmpresas.json
 
   fonts:

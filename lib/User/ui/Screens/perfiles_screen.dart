@@ -1,6 +1,5 @@
 import 'package:adminfo_new/User/repository/lista_empresa_repository.dart';
 
-
 import 'package:adminfo_new/widgets/card_container.dart';
 import 'package:adminfo_new/widgets/icono_perfil.dart';
 import 'package:adminfo_new/widgets/image_adminfo_movil_15_widget.dart';
@@ -36,20 +35,25 @@ class PerfilesScreen extends StatelessWidget {
       ),
       backgroundColor: const Color(0xfff7f8fb),
       body: Stack(children: [
+        CardContainer(
+          bottom: 0,
+          top: 20,
+          left: 20,
+          right: 20,
+          child: _ListaPerfil(
+            logoEmpresa: logoEmpresa,
+            nombreEmpresa: nombreEmpresa,
+          ),
+        ),
         Container(
-          padding: const EdgeInsets.only(top: 0, bottom: 0),
+          // padding: const EdgeInsets.only(top: 0, bottom: 10),
           //shape es la sombra
+          width: double.infinity,
+          height: 80,
+          margin: const EdgeInsets.only(top: 625),
+          // color: Colors.red,
           decoration: _createCardShape(),
         ),
-        CardContainer(
-            bottom: 50,
-            top: 20,
-            left: 20,
-            right: 20,
-            child: _ListaPerfil(
-              logoEmpresa: logoEmpresa,
-              nombreEmpresa: nombreEmpresa,
-            )),
       ]),
     );
   }
@@ -58,7 +62,7 @@ class PerfilesScreen extends StatelessWidget {
 BoxDecoration _createCardShape() => const BoxDecoration(
       image: DecorationImage(
           image: AssetImage('assets/Fondo_card.png'),
-          fit: BoxFit.contain,
+          fit: BoxFit.fill,
           alignment: Alignment.bottomCenter),
     );
 
@@ -80,7 +84,7 @@ class _ListaPerfil extends StatelessWidget {
       children: [
         const LogoPerfil(),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         Column(
           children: [
@@ -106,16 +110,19 @@ class _ListaPerfil extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 60,
+          height: 20,
         ),
         Expanded(
           child: FutureBuilder(
               future: tipoListado,
               initialData: const [],
               builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                return ListView(
-                  shrinkWrap: true,
-                  children: _listView(snapshot.data!, context),
+                return Container(
+                  margin: const EdgeInsets.only(top: 20, bottom: 60),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: _listView(snapshot.data!, context),
+                  ),
                 );
               }),
         ),

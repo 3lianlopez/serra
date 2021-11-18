@@ -39,8 +39,8 @@ class CardContainer extends StatelessWidget {
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
-            bottomLeft: Radius.circular(25),
-            bottomRight: Radius.circular(25),
+            // bottomLeft: Radius.circular(25),
+            // bottomRight: Radius.circular(25),
           ),
           boxShadow: [
             //sombra
